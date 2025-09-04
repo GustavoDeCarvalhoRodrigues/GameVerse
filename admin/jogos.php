@@ -2,7 +2,6 @@
 require __DIR__ . "/../includes/db.php";
 require __DIR__ . "/../includes/functions.php";
 require_admin();
-include __DIR__ . "/../includes/header.php";
 
 // Criar / Atualizar
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
+include __DIR__ . "/../includes/header.php";
 // Remover
 if (isset($_GET['del'])) {
   $id = (int) $_GET['del'];
@@ -104,9 +104,15 @@ if (isset($_GET['edit'])) {
       <?php endif; ?>
       <input type="hidden" name="imagem_atual" value="<?= h($edit['imagem']) ?>">
       <input type="file" name="imagem" accept="image/*">
-      <label style="font-weight:600;color:#7cc9ff;"><input type="checkbox" name="ativo" <?= $edit['ativo'] ? 'checked' : ''; ?>> Ativo</label>
-      <button class="btn" type="submit"
-        style="margin-top:10px;min-width:120px;"><?= $edit['idgames'] ? 'Salvar alterações' : 'Criar jogo' ?></button>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+        <label for="ativo" style="font-weight:600;color:#7cc9ff;margin:0;">Ativo</label>
+        <input type="checkbox" id="ativo" name="ativo" <?= $edit['ativo'] ? 'checked' : ''; ?>>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:10px;">
+        <button class="btn" type="submit"
+          style="min-width:120px;"><?= $edit['idgames'] ? 'Salvar alterações' : 'Criar jogo' ?></button>
+        <a href="index.php" class="btn alt" style="min-width:120px;text-align:center;display:inline-block;">Voltar</a>
+      </div>
     </form>
   </div>
   <div>
